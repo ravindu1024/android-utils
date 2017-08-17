@@ -1,4 +1,4 @@
-# android utils
+# Android Utils
 Helpers and simple implementations of frequently used utility classes
 
 # Installation
