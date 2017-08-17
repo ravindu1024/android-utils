@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_radius">35dp</dimen>
+    <dimen name="progress_size">45dp</dimen>
+    <dimen name="default_padding_dialog_inside">20dp</dimen>
+    <dimen name="padding_dialog_sides">25dp</dimen>
+</resources>
