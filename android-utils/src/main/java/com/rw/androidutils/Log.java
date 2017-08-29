@@ -64,6 +64,7 @@ public class Log
      */
     public static void enable()
     {
+        initialize();
         ENABLED = true;
     }
 
@@ -72,6 +73,7 @@ public class Log
      */
     public static void disable()
     {
+        initialize();
         ENABLED = false;
     }
 
@@ -81,6 +83,7 @@ public class Log
      */
     public static boolean isEnabled()
     {
+        initialize();
         return ENABLED;
     }
 
@@ -103,6 +106,7 @@ public class Log
      */
     public static void setTag(String tag)
     {
+        initialize();
         TAG = tag;
     }
 
@@ -170,7 +174,7 @@ public class Log
      * Checks if the app is running a debug or release build
      * @return true if the build type is debug
      */
-    public static boolean isDebugBuild()
+    private static boolean isDebugBuild()
     {
         boolean sDebug;
 
