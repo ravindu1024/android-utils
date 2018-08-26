@@ -7,9 +7,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/android-utils" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="/media/ravindu/EXT/Work/android-utils-lib" />
+            <option value="/media/ravindu/EXT/Work/android-utils-lib/android-utils" />
+            <option value="/media/ravindu/EXT/Work/android-utils-lib/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
