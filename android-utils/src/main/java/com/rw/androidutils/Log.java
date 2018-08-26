@@ -23,7 +23,7 @@ public class Log
     private static Level LEVEL = Level.LogLevelInfo;
     private static String TAG = "IMG";
     private static boolean isInitialised = false;
-    private static String SYSTEMPROP = "log.tag.vortilla";
+    private final static String SYSTEMPROP = "log.tag.rw";
 
 
     /**
@@ -37,9 +37,7 @@ public class Log
         {
             isInitialised = true;
 
-            if(isDebugBuild())
-                ENABLED = true;
-            else if(getSystemProperty(SYSTEMPROP).equalsIgnoreCase("DEBUG"))
+            if(getSystemProperty(SYSTEMPROP).equalsIgnoreCase("DEBUG"))
             {
                 ENABLED = true;
                 LEVEL = Level.LogLevelWarning;
@@ -64,7 +62,7 @@ public class Log
      */
     public static void enable()
     {
-        initialize();
+        isInitialised = true;
         ENABLED = true;
     }
 
@@ -73,7 +71,7 @@ public class Log
      */
     public static void disable()
     {
-        initialize();
+        isInitialised = true;
         ENABLED = false;
     }
 
@@ -168,36 +166,6 @@ public class Log
             android.util.Log.d(TAG, System.currentTimeMillis() + " : " + message);
         }
     }
-
-
-    /**
-     * Checks if the app is running a debug or release build
-     * @return true if the build type is debug
-     */
-    private static boolean isDebugBuild()
-    {
-        boolean sDebug;
-
-        try
-        {
-            final Class<?> activityThread = Class.forName("android.app.ActivityThread");
-            final Method currentPackage = activityThread.getMethod("currentPackageName");
-            final String packageName = (String) currentPackage.invoke(null, (Object[]) null);
-            final Class<?> buildConfig = Class.forName(packageName + ".BuildConfig");
-            final Field DEBUG = buildConfig.getField("DEBUG");
-            DEBUG.setAccessible(true);
-            sDebug = DEBUG.getBoolean(null);
-        }
-        catch (final Throwable t)
-        {
-            final String message = t.getMessage();
-            // Proguard obfuscated build. Most likely a production build.
-            sDebug = !(message != null && message.contains("BuildConfig")) && BuildConfig.DEBUG;
-        }
-
-        return sDebug;
-    }
-
 
     /**
      * check for the "log..tag.vortilla" system property
