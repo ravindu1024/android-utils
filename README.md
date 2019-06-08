@@ -15,9 +15,8 @@ allprojects {
 Include this in the app dependencies
 ```gradle
 	dependencies {
-	        implementation 'com.github.ravindu1024:android-utils:v2.0.0'
+	        implementation 'com.github.ravindu1024:android-utils:<latest-version>'
 	}
 
 ```
-
-If you get a "library missing" error, just add "compile 'com.google.code.gson:gson:2.7'" to the module dependencies list.
+Check latest version here: https://jitpack.io/#ravindu1024/android-utils
