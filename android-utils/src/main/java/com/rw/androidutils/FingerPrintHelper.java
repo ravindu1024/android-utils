@@ -8,8 +8,8 @@ import android.os.Build;
 import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.support.annotation.RequiresApi;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresApi;
+import androidx.annotation.RequiresPermission;
 import android.widget.Toast;
 
 import java.io.IOException;

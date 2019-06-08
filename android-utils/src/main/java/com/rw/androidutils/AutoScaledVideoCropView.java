@@ -6,7 +6,7 @@ import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.annotation.RawRes;
+import androidx.annotation.RawRes;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
@@ -488,9 +488,9 @@ public class AutoScaledVideoCropView extends TextureView implements TextureView.
     public interface MediaPlayerListener
     {
 
-        public void onVideoPrepared();
+        void onVideoPrepared();
 
-        public void onVideoEnd();
+        void onVideoEnd();
     }
 
     @Override

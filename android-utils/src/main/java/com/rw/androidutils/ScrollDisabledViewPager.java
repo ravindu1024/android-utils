@@ -1,7 +1,7 @@
 package com.rw.androidutils;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -9,6 +9,7 @@ import android.view.MotionEvent;
  * Created by ravindu on 22/02/17.
  */
 
+@SuppressWarnings("unused")
 public class ScrollDisabledViewPager extends ViewPager
 {
     private boolean isPagingEnabled = true;
