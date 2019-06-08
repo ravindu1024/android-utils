@@ -3,9 +3,9 @@ package com.rw.androidutils;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,13 +17,13 @@ import android.view.WindowManager;
  * Created by ravindu on 13/09/16.
  * Copyright © 2016 Vortilla. All rights reserved.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class CustomAlertDialog
 {
     private int mTheme = -1;
     protected AlertDialog mDialog = null;
-    protected Context mContext = null;
-    private boolean mCancelable = true;
+    protected Context mContext;
+    private boolean mCancelable;
     private boolean mIsInitialized = false;
     private String mTitle = null;
 
@@ -104,11 +104,14 @@ public abstract class CustomAlertDialog
         if(dialog.isShowing())
         {
             if(dialog.getWindow() != null)
+            {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-            WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-            lp.width = width;
-            dialog.getWindow().setAttributes(lp);
+                WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+                lp.width = width;
+                dialog.getWindow().setAttributes(lp);
+            }
+
         }
         else
             throw new UnsupportedOperationException("Dialog needs to be displayed before setting the width");

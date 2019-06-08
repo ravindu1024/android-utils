@@ -6,7 +6,7 @@ import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.annotation.RawRes;
+import androidx.annotation.RawRes;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
@@ -20,6 +20,7 @@ import java.io.IOException;
  * Date     : 05/01/2017
  * Link     : https://github.com/ravindu1024
  */
+@SuppressWarnings("unused")
 public class AutoScaledVideoCropView extends TextureView implements TextureView.SurfaceTextureListener
 {
     public static final boolean LOG_ON = true;
@@ -488,9 +489,9 @@ public class AutoScaledVideoCropView extends TextureView implements TextureView.
     public interface MediaPlayerListener
     {
 
-        public void onVideoPrepared();
+        void onVideoPrepared();
 
-        public void onVideoEnd();
+        void onVideoEnd();
     }
 
     @Override

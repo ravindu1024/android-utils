@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
  * Date          : 6/07/16
  * Description   : Android Log class
  */
+@SuppressWarnings("unused")
 public class Log
 {
     public enum Level

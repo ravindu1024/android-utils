@@ -14,7 +14,7 @@ import java.util.Arrays;
  * <p/>
  * Created by ravindu on 12/09/16.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class JsonUtils
 {
     public <T> T deserialize(String jsonData, Class<T> cls)
