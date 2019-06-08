@@ -17,7 +17,7 @@ import android.view.WindowManager;
  * Created by ravindu on 13/09/16.
  * Copyright © 2016 Vortilla. All rights reserved.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class CustomAlertDialog
 {
     private int mTheme = -1;
@@ -104,11 +104,14 @@ public abstract class CustomAlertDialog
         if(dialog.isShowing())
         {
             if(dialog.getWindow() != null)
+            {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-            WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-            lp.width = width;
-            dialog.getWindow().setAttributes(lp);
+                WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+                lp.width = width;
+                dialog.getWindow().setAttributes(lp);
+            }
+
         }
         else
             throw new UnsupportedOperationException("Dialog needs to be displayed before setting the width");

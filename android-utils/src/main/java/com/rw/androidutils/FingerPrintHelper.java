@@ -34,6 +34,7 @@ import static android.content.Context.KEYGUARD_SERVICE;
  * Created by ravindu on 25/07/17.
  */
 
+@SuppressWarnings("unused")
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerPrintHelper
 {

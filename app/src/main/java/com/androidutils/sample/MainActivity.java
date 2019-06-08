@@ -3,7 +3,9 @@ package com.androidutils.sample;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.rw.androidutils.CustomAlertDialog;
 import com.rw.androidutils.Log;
+import com.rw.androidutils.Utilities;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -16,5 +18,7 @@ public class MainActivity extends AppCompatActivity
 
         Log.enable();
         Log.d("test");
+
+        Utilities.showYesNoDialog(this, null, "ddd", "dd", () -> {}, "dd", () -> {});
     }
 }

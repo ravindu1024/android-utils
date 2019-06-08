@@ -51,9 +51,14 @@ import java.util.concurrent.TimeUnit;
  * Date          : 6/07/16
  * Description   : Frequently used utility functions
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused", "JavaDoc", "UnusedReturnValue"})
 public class Utilities
 {
+
+    public interface SimpleClickListener
+    {
+        void onClick();
+    }
 
     /**
      * Conver a Bitmap image into a byte array
@@ -74,7 +79,7 @@ public class Utilities
      * Reads a specified file and return the content as a single string
      *
      * @param context  The calling context
-     * @param fileName The path to the target file
+     * @param fileName The path to the target file (used as context.openFileInput(fileName))
      * @return the content of the file in a single string
      */
     @Nullable
@@ -130,10 +135,10 @@ public class Utilities
     }
 
     /**
-     * @see Utilities#showYesNoDialog(Context, String, String, String, DialogInterface.OnClickListener, String, DialogInterface.OnClickListener, boolean)
+     * @see Utilities#showYesNoDialog(Context, String, String, String, SimpleClickListener, String, SimpleClickListener, boolean)
      *
      */
-    public static @Nullable AlertDialog showYesNoDialog(@NonNull Context c, String title, String message, String yesText, @Nullable DialogInterface.OnClickListener yesListener, String noText, @Nullable DialogInterface.OnClickListener noListener)
+    public static @Nullable AlertDialog showYesNoDialog(@NonNull Context c, String title, String message, String yesText, @Nullable SimpleClickListener yesListener, String noText, @Nullable SimpleClickListener noListener)
     {
         return showYesNoDialog(c, title, message, yesText, yesListener, noText, noListener, false);
     }
@@ -150,7 +155,7 @@ public class Utilities
      * @param noListener  negative button callback (can be null)
      * @param cancellable is dialog dismissible
      */
-    public static @Nullable AlertDialog showYesNoDialog(@NonNull Context c, String title, String message, String yesText, @Nullable DialogInterface.OnClickListener yesListener, String noText, @Nullable DialogInterface.OnClickListener noListener, boolean cancellable)
+    public static @Nullable AlertDialog showYesNoDialog(@NonNull Context c, String title, String message, String yesText, @Nullable SimpleClickListener yesListener, String noText, @Nullable SimpleClickListener noListener, boolean cancellable)
     {
         AlertDialog dialog = null;
         try
@@ -158,8 +163,16 @@ public class Utilities
             AlertDialog.Builder builder = new AlertDialog.Builder(c);
             builder.setTitle(title);
             builder.setMessage(message);
-            builder.setPositiveButton(yesText, yesListener);
-            builder.setNegativeButton(noText, noListener);
+            builder.setPositiveButton(yesText, (dialog1, which) -> {
+                if(yesListener != null){
+                    yesListener.onClick();
+                }
+            });
+            builder.setNegativeButton(noText, (dialog1, which) -> {
+                if(noListener != null){
+                    noListener.onClick();
+                }
+            });
             builder.setCancelable(cancellable);
 
             dialog = builder.create();
@@ -183,7 +196,7 @@ public class Utilities
      * @param okListener button callback (can be null)
      * @param cancellable is dialog dismissible
      */
-    public static @Nullable AlertDialog showOkDialog(@NonNull Context c, String title, String message, String okText, @Nullable DialogInterface.OnClickListener okListener, boolean cancellable)
+    public static @Nullable AlertDialog showOkDialog(@NonNull Context c, String title, String message, String okText, @Nullable SimpleClickListener okListener, boolean cancellable)
     {
         AlertDialog dialog = null;
         try
@@ -192,7 +205,11 @@ public class Utilities
             AlertDialog.Builder builder = new AlertDialog.Builder(c);
             builder.setTitle(title);
             builder.setMessage(message);
-            builder.setPositiveButton(okText, okListener);
+            builder.setPositiveButton(okText, (dialog1, which) -> {
+                if(okListener != null){
+                    okListener.onClick();
+                }
+            });
             builder.setCancelable(cancellable);
 
             dialog = builder.create();
@@ -207,26 +224,26 @@ public class Utilities
     }
 
     /**
-     * @see Utilities#showOkDialog(Context, String, String, String, DialogInterface.OnClickListener, boolean)
+     * @see Utilities#showOkDialog(Context, String, String, String, SimpleClickListener, boolean)
      */
-    public static @Nullable AlertDialog showOkDialog(@NonNull Context c, String title, String message, String okText, @Nullable DialogInterface.OnClickListener okListener)
+    public static @Nullable AlertDialog showOkDialog(@NonNull Context c, String title, String message, String okText, @Nullable SimpleClickListener okListener)
     {
         return showOkDialog(c, title, message, okText, okListener, false);
     }
 
 
     public static @Nullable AlertDialog showYesNoCancelDialog(@NonNull Context c, String title, String message,
-                                                              String yesText, @Nullable DialogInterface.OnClickListener yesListener,
-                                                              String noText, @Nullable DialogInterface.OnClickListener noListener,
-                                                              String cancelText, @Nullable DialogInterface.OnClickListener cancelListener)
+                                                              String yesText, @Nullable SimpleClickListener yesListener,
+                                                              String noText, @Nullable SimpleClickListener noListener,
+                                                              String cancelText, @Nullable SimpleClickListener cancelListener)
     {
         return showYesNoCancelDialog(c, title, message, yesText, yesListener, noText, noListener, cancelText, cancelListener, false);
     }
 
     public static @Nullable AlertDialog showYesNoCancelDialog(@NonNull Context c, String title, String message,
-                                                              String yesText, @Nullable DialogInterface.OnClickListener yesListener,
-                                                              String noText, @Nullable DialogInterface.OnClickListener noListener,
-                                                              String cancelText, @Nullable DialogInterface.OnClickListener cancelListener,
+                                                              String yesText, @Nullable SimpleClickListener yesListener,
+                                                              String noText, @Nullable SimpleClickListener noListener,
+                                                              String cancelText, @Nullable SimpleClickListener cancelListener,
                                                               boolean cancelable)
     {
         AlertDialog dialog = null;
@@ -236,9 +253,21 @@ public class Utilities
             AlertDialog.Builder builder = new AlertDialog.Builder(c);
             builder.setTitle(title);
             builder.setMessage(message);
-            builder.setPositiveButton(yesText, yesListener);
-            builder.setNegativeButton(noText, noListener);
-            builder.setNeutralButton(cancelText, cancelListener);
+            builder.setPositiveButton(yesText, (dialog1, which) -> {
+                if(yesListener != null){
+                    yesListener.onClick();
+                }
+            });
+            builder.setNegativeButton(noText, (dialog1, which) -> {
+                if(noListener != null){
+                    noListener.onClick();
+                }
+            });
+            builder.setNeutralButton(cancelText, (dialog1, which) -> {
+                if(cancelListener != null){
+                    cancelListener.onClick();
+                }
+            });
             builder.setCancelable(cancelable);
 
             dialog = builder.create();
@@ -252,23 +281,6 @@ public class Utilities
         return dialog;
     }
 
-
-    /**
-     * Creates and returns a progress dialog
-     *
-     * @param c           calling context
-     * @param message     dialog message body
-     * @param canceleable set if canceleable on back button press
-     * @return the created progress dialog
-     */
-    public static ProgressDialog createProgressDialog(@NonNull Context c, String message, boolean canceleable)
-    {
-        ProgressDialog p = new ProgressDialog(c);
-        p.setMessage(message);
-        p.setCancelable(canceleable);
-
-        return p;
-    }
 
 
     /**
@@ -368,33 +380,6 @@ public class Utilities
         return BitmapFactory.decodeFile(fileName, options);
     }
 
-    /**
-     * Generate key hash for api key generation. The generated key will be printed to logcat.
-     *
-     * @param context the calling context
-     */
-    public static void generateKeyHash(@NonNull Context context)
-    {
-        try
-        {
-            PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures)
-            {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d(Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
 
     /**
      * Return false to stop scheduled task
@@ -423,15 +408,10 @@ public class Utilities
         {
             private Handler handler = new Handler(Looper.getMainLooper());
 
-            private Runnable runnable = new Runnable()
-            {
-                @Override
-                public void run()
+            private Runnable runnable = () -> {
+                if (!listener.onScheduledTask())
                 {
-                    if (!listener.onScheduledTask())
-                    {
-                        service.shutdown();
-                    }
+                    service.shutdown();
                 }
             };
 
@@ -472,15 +452,10 @@ public class Utilities
         {
             private Handler handler = new Handler(Looper.getMainLooper());
 
-            private Runnable runnable = new Runnable()
-            {
-                @Override
-                public void run()
+            private Runnable runnable = () -> {
+                if (!listener.onScheduledTask())
                 {
-                    if (!listener.onScheduledTask())
-                    {
-                        service.shutdown();
-                    }
+                    service.shutdown();
                 }
             };
 
@@ -626,32 +601,6 @@ public class Utilities
 
 
     /**
-     * Loads an image file into a given imageview. App must have the correct permissions
-     * before calling this function
-     *
-     * @param path the filepath of the image
-     * @param target the target imageview
-     * @return true if image can be read and set to the target view, false otherwise
-     */
-    public static boolean loadImageToTarget(String path, ImageView target)
-    {
-        boolean ret = false;
-        File imgFile = new File(path);
-
-        if (imgFile.canRead())
-        {
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-            target.setImageBitmap(myBitmap);
-
-            ret = true;
-        }
-
-        return ret;
-    }
-
-
-    /**
      * Set the system status bar text and icon color hint to black.
      * NOTE: This turns off the translucent status bar flag
      *
@@ -668,12 +617,6 @@ public class Utilities
                 v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }
-    }
-
-    public static void setTextViewActive(TextView t, boolean active)
-    {
-        t.setAlpha(active ? 1.0f : 0.4f);
-        t.setEnabled(active);
     }
 
 

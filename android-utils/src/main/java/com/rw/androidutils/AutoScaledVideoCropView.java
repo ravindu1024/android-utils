@@ -20,6 +20,7 @@ import java.io.IOException;
  * Date     : 05/01/2017
  * Link     : https://github.com/ravindu1024
  */
+@SuppressWarnings("unused")
 public class AutoScaledVideoCropView extends TextureView implements TextureView.SurfaceTextureListener
 {
     public static final boolean LOG_ON = true;

@@ -10,6 +10,7 @@ import android.view.animation.Transformation;
  * Created by ravindu on 31/08/16.
  * Copyright © 2016 Vortilla. All rights reserved.
  */
+@SuppressWarnings("unused")
 public class ResizeAnimation extends Animation
 {
 
@@ -18,8 +19,8 @@ public class ResizeAnimation extends Animation
     private int startHeight;
     private int deltaHeight;
 
-    private int originalWidth = 0;
-    private int originalHeight = 0;
+    private int originalWidth;
+    private int originalHeight;
     private View view;
 
     private boolean fillEnabled = false;
