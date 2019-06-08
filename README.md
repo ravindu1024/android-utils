@@ -15,7 +15,7 @@ allprojects {
 Include this in the app dependencies
 ```gradle
 	dependencies {
-	        compile 'com.github.ravindu1024:android-utils:v2.0.0'
+	        implementation 'com.github.ravindu1024:android-utils:v2.0.0'
 	}
 
 ```
