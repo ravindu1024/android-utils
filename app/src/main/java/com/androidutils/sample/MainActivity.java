@@ -19,6 +19,6 @@ public class MainActivity extends AppCompatActivity
         Log.enable();
         Log.d("test");
 
-        Utilities.showYesNoDialog(this, null, "ddd", "dd", () -> {}, "dd", () -> {});
+        Utilities.showYesNoDialog(this, "Title", "Android Utils", "YES", () -> {}, "NO", () -> {});
     }
 }
